@@ -1,8 +1,6 @@
 package adopet.api.model;
 
-import adopet.api.dto.SolicitacaoDeAdocaoDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "adocoes")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @EqualsAndHashCode(of = "id")
 public class Adocao {
