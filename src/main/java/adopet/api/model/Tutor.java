@@ -28,12 +28,16 @@ public class Tutor {
     @NotBlank
     private String email;
 
+    @NotBlank
+    private String telefone;
+
     @OneToMany(mappedBy = "tutor")
     private List<Adocao> adocoes = new ArrayList<>();
 
     public Tutor(CadastroTutorDTO dados){
         this.nome = dados.nome();
         this.email = dados.email();
+        this.telefone = dados.telefone();
     }
 
 }
