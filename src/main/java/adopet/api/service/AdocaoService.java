@@ -53,7 +53,7 @@ public class AdocaoService {
         }
 
         // Tutor com mais de 2 adoções aprovadas
-        Integer tutorAdocoes = adocaoRepository.countByTutorAndStatus(tutor, StatusAdocao.APROVADO);
+        Integer tutorAdocoes = adocaoRepository.countByTutorIdAndStatus(dto.idTutor(), StatusAdocao.APROVADO);
         if (tutorAdocoes == 2){
             throw new IllegalStateException("Tutor com aprovado ao ado.");
         }
