@@ -45,12 +45,8 @@ public class AdocaoController {
     @PutMapping("/aprovar")
     @Transactional
     public ResponseEntity<String> aprovar(@RequestBody @Valid AprovarAdocaoDTO dto){
-        try {
-            this.service.aprovar(dto);
-            return ResponseEntity.ok("Adoção aprovada com sucesso!");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+        this.service.aprovar(dto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/reprovar")
