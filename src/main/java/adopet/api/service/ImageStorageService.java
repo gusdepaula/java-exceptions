@@ -12,14 +12,15 @@ public class ImageStorageService {
 
     private static final String PASTA_UPLOAD = System.getProperty("user.dir") + "/src/main/resources/storage/";
 
-    public String upload(MultipartFile imagem) throws IOException {
+
+    public String upload(MultipartFile imagem) throws IOException{
 
         String novoNome = this.gerarNovoNome(imagem.getOriginalFilename());
 
         String caminhoCompletoDoArquivo = PASTA_UPLOAD + novoNome;
 
         imagem.transferTo(new File(caminhoCompletoDoArquivo));
-        
+
         return novoNome;
     }
 

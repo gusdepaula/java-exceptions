@@ -8,26 +8,32 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler extends  RuntimeException {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(AdocaoException.class)
-    public ResponseEntity<ResponseError> adocaoException(AdocaoException e){
+    public ResponseEntity<ResponseError> adocaoException(AdocaoException ex){
+
         ResponseError response = new ResponseError(
-                e.getMessage(),
+                ex.getMessage(),
                 HttpStatus.BAD_REQUEST,
                 LocalDateTime.now()
         );
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ResponseError> trataException(Exception e){
+    public ResponseEntity<ResponseError> trataException(Exception ex){
+
         ResponseError response = new ResponseError(
-                e.getMessage(),
+                ex.getMessage(),
                 HttpStatus.BAD_REQUEST,
                 LocalDateTime.now()
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
+
+
+
 }

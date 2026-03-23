@@ -4,7 +4,5 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
-public class ResponseError {
-    public ResponseError(String message, HttpStatus httpStatus, LocalDateTime time) {
-    }
+public record ResponseError(String message, HttpStatus httpStatus, LocalDateTime time) {
 }

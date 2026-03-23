@@ -12,8 +12,7 @@ public class PilhaDeExecucao {
 
         Usuario usuario = null;
 
-            System.out.println(usuario.nome);
-
+        System.out.println(usuario.nome);
 
         System.out.println("[Fim] - metodo2");
     }

@@ -37,26 +37,27 @@ public class AdocaoService {
     }
 
     public void solicitar(SolicitacaoDeAdocaoDTO dto){
-        Pet pet = petRepository.findById(dto.idPet())
-                .orElseThrow(() -> new EntityNotFoundException("Pet não encontrado com id: " + dto.idPet()));
-        Tutor tutor = tutorRepository.findById(dto.idTutor())
-                .orElseThrow(() -> new EntityNotFoundException("Tutor não encontrado com id: " + dto.idTutor()));
+        Pet pet = petRepository.getReferenceById(dto.idPet());
+        Tutor tutor = tutorRepository.getReferenceById(dto.idTutor());
 
-        // Pet já adotado
-        if (pet.getAdotado()) {
-            throw new AdocaoException("Pet já foi adotado.");
+        //Pet já adotado;
+        if(pet.getAdotado()){
+            throw new AdocaoException("Pet já adotado");
         }
 
-        //Pet com solicitação de adoção em andamento
-        Boolean petAdocaoEmAndamento = adocaoRepository.existsByPetIdAndStatus(dto.idPet(), StatusAdocao.AGUARDANDO_AVALIACAO);
-        if (petAdocaoEmAndamento){
-            throw new AdocaoException("Pet com adoção em andamento.");
+        //Pet com solicitação de adoção em andamento;
+        Boolean petAdocaoEmAndamento = adocaoRepository.existsByPetIdAndStatus(dto.idPet(),StatusAdocao.AGUARDANDO_AVALIACAO);
+
+        if(petAdocaoEmAndamento){
+            throw new AdocaoException("Pet com adocão em andamento");
         }
 
-        // Tutor com mais de 2 adoções aprovadas
-        Integer tutorAdocoes = adocaoRepository.countByTutorIdAndStatus(dto.idTutor(), StatusAdocao.APROVADO);
+        //Tutor com 2 adoções aprovadas.
+
+        Integer tutorAdocoes = adocaoRepository.countByTutorIdAndStatus(dto.idTutor(),StatusAdocao.APROVADO);
+
         if (tutorAdocoes == 2){
-            throw new AdocaoException("Tutor com aprovado ao ado.");
+            throw new AdocaoException("Tutor com máximo de adocoes");
         }
 
         adocaoRepository.save(new Adocao(tutor,pet, dto.motivo()));

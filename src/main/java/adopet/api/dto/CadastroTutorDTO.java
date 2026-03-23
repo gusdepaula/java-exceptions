@@ -7,9 +7,6 @@ public record CadastroTutorDTO(
         String nome,
 
         @NotBlank
-        String email,
-
-        @NotBlank
-        String telefone
+        String email
 ) {
 }
